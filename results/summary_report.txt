@@ -1,0 +1,80 @@
+======================================================================
+AI CYBERSECURITY COPILOT — EVALUATION SUMMARY REPORT
+======================================================================
+Number of runs per scenario: 1
+Number of scenarios: 5
+
+----------------------------------------------------------------------
+ENGINE: Rule-Based
+----------------------------------------------------------------------
+
+1. Incident Classification Accuracy: 100.00%
+   (5/5 correctly classified)
+
+2. Risk Level Accuracy: 80.00%
+
+3. Recommendation Agreement (avg across scenarios):
+   Precision: 0.960
+   Recall:    0.960
+   F1-Score:  0.960
+
+4. Average Processing Time (across all scenarios):
+   0.038 milliseconds
+
+----------------------------------------------------------------------
+ENGINE: Hybrid (Llama-3 via Ollama)
+----------------------------------------------------------------------
+
+1. Incident Classification Accuracy: 100.00%
+   (5/5 correctly classified)
+
+2. Risk Level Accuracy: 80.00%
+
+3. Recommendation Agreement (avg across scenarios):
+   Precision: 0.240
+   Recall:    0.240
+   F1-Score:  0.240
+
+4. Average Processing Time (across all scenarios):
+   5459.063 milliseconds
+
+======================================================================
+PER-SCENARIO BREAKDOWN
+======================================================================
+
+>>> Rule-Based
+
+Recommendation Agreement:
+Scenario  Gold Standard Actions  System Actions  Matched Actions  Precision  Recall  F1-Score
+      S1                      5               5                4        0.8     0.8       0.8
+      S2                      5               5                5        1.0     1.0       1.0
+      S3                      5               5                5        1.0     1.0       1.0
+      S4                      5               5                5        1.0     1.0       1.0
+      S5                      5               5                5        1.0     1.0       1.0
+
+Processing Time:
+Scenario  Run 1  Average Time
+      S1  0.063         0.063
+      S2  0.031         0.031
+      S3  0.053         0.053
+      S4  0.022         0.022
+      S5  0.021         0.021
+
+
+>>> Hybrid (Llama-3 via Ollama)
+
+Recommendation Agreement:
+Scenario  Gold Standard Actions  System Actions  Matched Actions  Precision  Recall  F1-Score
+      S1                      5               5                2        0.4     0.4       0.4
+      S2                      5               5                0        0.0     0.0       0.0
+      S3                      5               5                1        0.2     0.2       0.2
+      S4                      5               5                1        0.2     0.2       0.2
+      S5                      5               5                2        0.4     0.4       0.4
+
+Processing Time:
+Scenario    Run 1  Average Time
+      S1 5671.482      5671.482
+      S2 5754.612      5754.612
+      S3 5137.257      5137.257
+      S4 5293.719      5293.719
+      S5 5438.246      5438.246

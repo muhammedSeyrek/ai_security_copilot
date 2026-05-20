@@ -1,0 +1,6 @@
+Scenario,Gold Standard Actions,System Actions,Matched Actions,Precision,Recall,F1-Score
+S1,5,5,2,0.4,0.4,0.4
+S2,5,5,0,0.0,0.0,0.0
+S3,5,5,1,0.2,0.2,0.2
+S4,5,5,1,0.2,0.2,0.2
+S5,5,5,2,0.4,0.4,0.4

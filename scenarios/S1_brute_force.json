@@ -1,0 +1,10 @@
+{
+  "scenario_id": "S1",
+  "alert_type": "Brute Force Attack",
+  "source_ip": "203.0.113.10",
+  "destination_ip": "192.168.1.15",
+  "asset_criticality": 8,
+  "evidence_confidence": 9,
+  "event_frequency": 7,
+  "description": "57 failed SSH login attempts were detected within 10 minutes from the same external IP address targeting the production SSH server."
+}

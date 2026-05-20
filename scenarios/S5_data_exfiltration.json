@@ -1,0 +1,10 @@
+{
+  "scenario_id": "S5",
+  "alert_type": "Data Exfiltration",
+  "source_ip": "192.168.1.30",
+  "destination_ip": "203.0.113.99",
+  "asset_criticality": 10,
+  "evidence_confidence": 9,
+  "event_frequency": 8,
+  "description": "Unusually large outbound data transfer (4.2 GB) was detected from an internal file server to an external IP address outside business hours."
+}

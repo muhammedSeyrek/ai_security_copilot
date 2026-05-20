@@ -1,0 +1,6 @@
+Scenario,Risk Score,Assigned Risk Level,Expected Risk Level,Correct
+S1,80.0,High,High,1
+S2,87.0,Critical,Critical,1
+S3,70.0,High,High,1
+S4,81.0,High,Critical,0
+S5,91.0,Critical,Critical,1

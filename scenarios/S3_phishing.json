@@ -1,0 +1,10 @@
+{
+  "scenario_id": "S3",
+  "alert_type": "Phishing",
+  "source_ip": "mail.external-domain.com",
+  "destination_ip": "user@organization.com",
+  "asset_criticality": 7,
+  "evidence_confidence": 8,
+  "event_frequency": 6,
+  "description": "A suspicious email containing a credential harvesting link spoofing the internal HR portal was delivered to multiple employee mailboxes."
+}

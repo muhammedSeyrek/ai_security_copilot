@@ -1,0 +1,10 @@
+{
+  "scenario_id": "S4",
+  "alert_type": "Privilege Escalation",
+  "source_ip": "192.168.1.45",
+  "destination_ip": "192.168.1.10",
+  "asset_criticality": 9,
+  "evidence_confidence": 8,
+  "event_frequency": 7,
+  "description": "A standard user account attempted to execute administrative commands and modify privileged system files on a critical server."
+}

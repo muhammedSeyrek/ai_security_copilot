@@ -1,0 +1,10 @@
+{
+  "scenario_id": "S2",
+  "alert_type": "SQL Injection",
+  "source_ip": "198.51.100.23",
+  "destination_ip": "192.168.1.20",
+  "asset_criticality": 9,
+  "evidence_confidence": 9,
+  "event_frequency": 8,
+  "description": "Suspicious SQL payloads containing OR 1=1 and UNION SELECT patterns were detected in HTTP POST requests to the customer login endpoint."
+}

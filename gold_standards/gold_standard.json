@@ -1,0 +1,57 @@
+{
+  "S1": {
+    "incident_type": "Brute Force Attack",
+    "expected_risk_level": "High",
+    "actions": [
+      "Block the source IP address",
+      "Review authentication logs",
+      "Identify targeted user accounts",
+      "Enforce multi-factor authentication",
+      "Reset affected credentials if compromise is suspected"
+    ]
+  },
+  "S2": {
+    "incident_type": "SQL Injection",
+    "expected_risk_level": "Critical",
+    "actions": [
+      "Block malicious HTTP requests",
+      "Review web server and database logs",
+      "Validate input sanitization mechanisms",
+      "Apply parameterized queries",
+      "Update Web Application Firewall rules"
+    ]
+  },
+  "S3": {
+    "incident_type": "Phishing",
+    "expected_risk_level": "High",
+    "actions": [
+      "Quarantine the suspicious email",
+      "Block the malicious URL or domain",
+      "Reset credentials if user interaction occurred",
+      "Search for similar emails across mailboxes",
+      "Notify affected users and security team"
+    ]
+  },
+  "S4": {
+    "incident_type": "Privilege Escalation",
+    "expected_risk_level": "Critical",
+    "actions": [
+      "Disable or isolate the suspicious account",
+      "Review privilege change logs",
+      "Inspect affected host for unauthorized changes",
+      "Revoke unauthorized privileges",
+      "Conduct endpoint forensic analysis"
+    ]
+  },
+  "S5": {
+    "incident_type": "Data Exfiltration",
+    "expected_risk_level": "Critical",
+    "actions": [
+      "Block outbound connection to external destination",
+      "Isolate affected internal host",
+      "Review data transfer logs",
+      "Identify type and volume of transferred data",
+      "Notify incident response team for containment and investigation"
+    ]
+  }
+}
