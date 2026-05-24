@@ -1,10 +1,10 @@
 {
   "scenario_id": "S3",
-  "alert_type": "Phishing",
-  "source_ip": "mail.external-domain.com",
+  "alert_type": "Suspicious Login Anomaly",
+  "source_ip": "185.199.108.153",
   "destination_ip": "user@organization.com",
   "asset_criticality": 7,
   "evidence_confidence": 8,
   "event_frequency": 6,
-  "description": "A suspicious email containing a credential harvesting link spoofing the internal HR portal was delivered to multiple employee mailboxes."
+  "description": "User logged in from an unrecognized device and immediately accessed the HR portal. Shortly after, a password reset token was requested. No explicit payload was detected."
 }

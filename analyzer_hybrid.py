@@ -30,7 +30,7 @@ DEFAULT_MODEL = "llama3.2"
 
 
 HYBRID_PROMPT_TEMPLATE = """CRITICAL: Output EXACTLY 5 concise incident response actions.
-Format ONLY as JSON. EACH ACTION MAX 6 WORDS.
+Format ONLY as JSON. EACH ACTION MAX 15 WORDS.
 
 Incident: {incident_type} | Risk: {risk_level}
 
@@ -45,11 +45,10 @@ RESPOND WITH THIS FORMAT ONLY:
   ]
 }}
 
-REMEMBER: Exactly 5 actions, max 6 words each, JSON format ONLY.
+REMEMBER: Exactly 5 actions, JSON format ONLY.
 
-Now generate for: {incident_type}
-
-{{"recommendations": [""
+Now generate recommendations for: {incident_type}
+"""
 
 
 def _ollama_available() -> bool:

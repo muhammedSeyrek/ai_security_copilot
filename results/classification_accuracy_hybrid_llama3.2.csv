@@ -1,6 +1,6 @@
 Scenario,Expected Type,Predicted Type,Correct
 S1,Brute Force Attack,Brute Force Attack,1
 S2,SQL Injection,SQL Injection,1
-S3,Phishing,Phishing,1
+S3,Phishing,Unknown,0
 S4,Privilege Escalation,Privilege Escalation,1
 S5,Data Exfiltration,Data Exfiltration,1

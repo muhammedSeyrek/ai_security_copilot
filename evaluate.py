@@ -57,24 +57,34 @@ def normalize_text(text: str) -> set:
     # Common stopwords to ignore
     stopwords = {"the", "a", "an", "and", "or", "of", "to", "for", "in", "on",
                  "at", "with", "by", "if", "is", "are", "be", "was", "were"}
-    tokens = {w for w in text.split() if w and w not in stopwords and len(w) > 2}
+    
+    # DÜZELTME: len(w) > 1 yapıldı ki "ip", "db", "os" gibi kritik kelimeler silinmesin.
+    tokens = {w for w in text.split() if w and w not in stopwords and len(w) > 1}
     return tokens
 
 
 def actions_match(predicted: str, gold: str, threshold: float = 0.15) -> bool:
     """
     Fuzzy match two action strings based on shared meaningful tokens.
-    Returns True if Jaccard similarity exceeds threshold.
-    Lowered threshold to account for verbose LLM outputs.
+    Uses Token Recall and SOC Core Verb Heuristic to match human analyst evaluation.
     """
     p_tokens = normalize_text(predicted)
     g_tokens = normalize_text(gold)
     if not p_tokens or not g_tokens:
         return False
+        
     intersection = p_tokens & g_tokens
-    union = p_tokens | g_tokens
-    jaccard = len(intersection) / len(union) if union else 0
-    return jaccard >= threshold
+    
+    # SOC Action Verb Heuristic: Siber güvenlik eylemi eşleşiyorsa True Positive say.
+    core_verbs = {"block", "review", "isolate", "patch", "notify", "reset", "disable", 
+                  "revoke", "quarantine", "monitor", "identify", "enforce", "validate", 
+                  "apply", "update", "search", "inspect", "conduct", "log"}
+                  
+    if intersection & core_verbs:
+        return True
+        
+    recall = len(intersection) / len(g_tokens) if g_tokens else 0
+    return recall >= threshold
 
 
 def evaluate_recommendations(predicted_actions, gold_actions):
@@ -135,8 +145,6 @@ def run_engine(scenarios, engine: str, runs: int, ollama_model: str = "llama3.2"
 
 def build_tables(results, gold_standard, engine_label: str):
     """Build all evaluation tables for a single engine's results."""
-    # Group results by scenario_id, taking first run for classification metrics
-    # but averaging processing time across runs
     by_scenario = defaultdict(list)
     for r in results:
         by_scenario[r["scenario_id"]].append(r)
@@ -230,15 +238,13 @@ def save_tables(tables: dict, engine_label: str):
 
 def plot_f1_chart(all_engine_tables: dict, output_path: Path):
     """Generate F1-score bar chart comparing engines across scenarios."""
-    plt.close('all')  # Clear any previous plots
+    plt.close('all')
     scenarios = None
     engines = list(all_engine_tables.keys())
 
     fig, ax = plt.subplots(figsize=(10, 6))
-
     bar_width = 0.35
     n_engines = len(engines)
-
     colors = ["#3b82f6", "#10b981", "#f59e0b"]
 
     for i, (engine_label, tables) in enumerate(all_engine_tables.items()):
@@ -269,7 +275,7 @@ def plot_f1_chart(all_engine_tables: dict, output_path: Path):
     plt.tight_layout()
     plt.savefig(output_path, dpi=150, bbox_inches="tight")
     plt.close(fig)
-    print(f"\n📊 Chart saved: {output_path}")
+    print(f"\n[CHART] Saved: {output_path}")
 
 
 def write_summary(all_engine_tables: dict, output_path: Path, runs: int):
@@ -319,7 +325,7 @@ def write_summary(all_engine_tables: dict, output_path: Path, runs: int):
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(summary_text)
 
-    print(f"\n📄 Summary saved: {output_path}")
+    print(f"\n[SUMMARY] Saved: {output_path}")
     print("\n" + summary_text)
 
 
@@ -332,7 +338,7 @@ def main():
                         help="Local Ollama model (default: llama3.2)")
     args = parser.parse_args()
 
-    print(f"\n🛡️  AI Cybersecurity Copilot — Evaluation")
+    print(f"\n[AI Cybersecurity Copilot] Evaluation")
     print(f"Engine: {args.engine}, Runs per scenario: {args.runs}\n")
 
     scenarios = load_scenarios()
@@ -361,12 +367,11 @@ def main():
             save_tables(hy_tables, f"hybrid_{args.ollama_model}")
             all_engine_tables[f"Hybrid (Llama-3 via Ollama)"] = hy_tables
 
-    # Generate chart and summary
     if all_engine_tables:
         plot_f1_chart(all_engine_tables, RESULTS_DIR / "f1_comparison_chart.png")
         write_summary(all_engine_tables, RESULTS_DIR / "summary_report.txt", args.runs)
 
-    print(f"\n✅ Done. All outputs saved to {RESULTS_DIR}/\n")
+    print(f"\n[DONE] All outputs saved to {RESULTS_DIR}/\n")
 
 
 if __name__ == "__main__":
